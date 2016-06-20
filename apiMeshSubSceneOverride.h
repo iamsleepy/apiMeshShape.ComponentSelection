@@ -27,6 +27,8 @@ namespace MHWRender {
 	class MVertexBuffer;
 	class MIndexBuffer;
 	class MShaderInstance;
+	class MRenderItem;
+	class MIntersection;
 }
 
 class apiMesh;
@@ -66,6 +68,9 @@ public:
 	virtual void updateSelectionGranularity(
 		const MDagPath& path,
 		MHWRender::MSelectionContext& selectionContext);
+
+	// Fix component selection
+	virtual bool getInstancedSelectionPath(const MHWRender::MRenderItem& renderItem, const MHWRender::MIntersection& intersection, MDagPath& dagPath) const;
 
 	void untrackLinkLostData(apiMeshSubSceneOverrideHelpers::ShadedItemUserData* data);
 

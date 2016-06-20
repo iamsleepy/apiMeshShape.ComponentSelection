@@ -1712,3 +1712,17 @@ static bool floatApproxEqual(float left, float right)
     return fabs(left - right) < 0.0001f;
 }
 
+// Fix component selection
+bool apiMeshSubSceneOverride::getInstancedSelectionPath(const MHWRender::MRenderItem& renderItem, const MHWRender::MIntersection& intersection, MDagPath& dagPath) const
+{
+	// Return shape path for the component selection
+	if(intersection.selectionLevel() == MHWRender::MSelectionContext::kComponent)
+	{
+		MFnDagNode dagNode(fObject);	
+		dagNode.getPath(dagPath);
+		return true;
+	}
+
+	// Use transform path by default.
+	return false;
+}
